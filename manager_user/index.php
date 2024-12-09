@@ -11,7 +11,6 @@ require_once('./includes/database.php');
 require_once('./includes/session.php');
 
 
-
 $module = _MODULE;
 $action = _ACTION;
 

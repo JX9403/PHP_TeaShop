@@ -13,9 +13,9 @@ layouts('header', $data);
 
 if (isPost()) {
   $filterAll = filter();
-  echo '<pre>';
-  print_r($filterAll);
-  echo '</pre>';
+  // echo '<pre>';
+  // print_r($filterAll);
+  // echo '</pre>';
   $errors = []; // Mang chua cac loi
 
   // validate fullname
@@ -70,6 +70,7 @@ if (isPost()) {
       'email' => $filterAll['email'],
       'phone' => $filterAll['phone'],
       'password' => password_hash($filterAll['password'], PASSWORD_DEFAULT),
+      // password_verify
       'create_at' => date('Y-m-d H:i:s'),
       'role' => $filterAll['role'],
     ];

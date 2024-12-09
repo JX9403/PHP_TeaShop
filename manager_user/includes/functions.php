@@ -41,21 +41,20 @@ function filter()
     // xu ly du lieu truoc khi hien thi ra
     if (!empty($_GET)) {
       foreach ($_GET as $key => $value) {
+        //Loai bo script
         $key = strip_tags($key);
         if (is_array(($value))) {
           $filterArr[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+          // < > & "
         } else {
           $filterArr[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
         }
-
-
       }
     }
 
   }
 
   if (isPost()) {
-    // duong link url
     // xu ly du lieu truoc khi hien thi ra
     if (!empty($_POST)) {
       foreach ($_POST as $key => $value) {
@@ -69,6 +68,7 @@ function filter()
     }
 
   }
+  
   return $filterArr;
 }
 
@@ -108,7 +108,6 @@ function isPhone($phone)
 
   $checkNumber = false;
   if (isNumberInt($phone) && (strlen($phone) == 9)) {
-
     $checkNumber = true;
   }
 
@@ -151,4 +150,4 @@ function isLogin()
     }
   }
   return $checkLogin;
-}
+};

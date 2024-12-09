@@ -106,6 +106,7 @@ $msg_type = getFlashData('msg_type');
                           <td><?php echo $user['role']; ?></td>
                           <td><?php echo $user['create_at']; ?></td>
                           <td><?php echo $user['update_at']; ?></td>
+                          <!-- edit -->
                           <td>
                             <div class="d-flex justify-content-center ">
                               <a href="?module=users&action=edit&id=<?php echo $user['id']; ?>"
@@ -114,7 +115,7 @@ $msg_type = getFlashData('msg_type');
                               </a>
                             </div>
                           </td>
-
+                          <!-- Delete -->
                           <td>
                             <div class="d-flex justify-content-center ">
 

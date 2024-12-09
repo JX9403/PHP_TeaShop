@@ -11,26 +11,22 @@ $data = [
 layouts('header', $data);
 
 $filterAll = filter();
+
 if (!empty($filterAll['id'])) {
   $userId = $filterAll['id'];
-
   // Kiem tra userid co ton tai trong db ko
 
   $userDetail = oneRaw("SELECT * FROM users WHERE id='$userId'");
   // neu ton tai
   if ($userDetail) {
     setFlashData('user-detail', $userDetail);
-
   } else {
     redirect("?module=users&action=dashboard");
   }
 }
 
 if (isPost()) {
-  // $filterAll = filter();
-  // echo '<pre>';
-  // print_r($filterAll);
-  // echo '</pre>';
+
   $errors = []; // Mang chua cac loi
 
   // validate fullname
@@ -41,22 +37,17 @@ if (isPost()) {
       $errors['fullName']['min'] = 'Họ tên phải có ít nhất 3 ký tự!';
     }
   }
-
-
+ // Email 
+ if (empty($filterAll['email'])) {
+  $errors['email']['required'] = 'Email bắt buộc phải nhập!';
+} 
   // phone
-
   if (empty($filterAll['phone'])) {
     $errors['phone']['required'] = 'Số điện thoại bắt buộc phải nhập!';
   } else {
     if (!isPhone($filterAll['phone'])) {
       $errors['phone']['isPhone'] = "Số điện thoại không đúng định dạng!";
     }
-  }
-  //password
-
-
-  if ($filterAll['password_confirm'] != $filterAll['password']) {
-    $errors['password_confirm']['match'] = "Mật khẩu nhập lại không đúng!";
   }
 
   if (empty($errors)) {
@@ -68,6 +59,7 @@ if (isPost()) {
       'update_at' => date('Y-m-d H:i:s'),
       'role' => $filterAll['role'],
     ];
+
     $condition = "id = '$userId'";
 
     $updateStatus = update('users', $dataUpdate, $condition);
@@ -75,7 +67,6 @@ if (isPost()) {
       setFlashData("msg", "Cập nhật thành công!");
       setFlashData('msg_type', 'success');
       redirect('?module=users&action=edit&id=' . $userId);
-
     }
 
   } else {
@@ -85,22 +76,16 @@ if (isPost()) {
     setFlashData('errors', $errors);
 
   }
+
   redirect('?module=users&action=edit&id=' . $userId);
 }
 
 $msg = getFlashData('msg');
-// echo '<pre';
-// print_r(getFlashData('msg'));
-// echo '</pre>';
-
 $msg_type = getFlashData('msg_type');
-// echo '<pre';
-// echo 'msgtype=';
-// print_r(getFlashData('msg_type'));
-// echo '</pre>';
 $errors = getFlashData('errors');
 $old = getFlashData('old');
 $userDetail = getFlashData('user-detail');
+
 if (!empty($userDetail)) {
   $old = $userDetail;
 }
@@ -230,8 +215,6 @@ if (!empty($userDetail)) {
                     <div class="d-flex justify-content-end mt-3">
                       <a href='?module=users&action=list' class="btn btn-outline-secondary me-4">Quay lại</a>
                       <button type="submit" class="btn btn-register ">Cập nhật</button>
-
-
                     </div>
                   </form>
                 </div>

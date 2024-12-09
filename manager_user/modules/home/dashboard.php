@@ -16,6 +16,7 @@ if (!isLogin()) {
   redirect('?module=auth&action=login');
 }
 
+
 $listUsers = getRaw("SELECT * FROM users ORDER BY update_at");
 $listUsersByOrder = getRaw("SELECT * FROM users ORDER BY order_quantity DESC");
 $listUsersByTotal = getRaw("SELECT * FROM users ORDER BY total_purchase DESC");
@@ -31,8 +32,6 @@ foreach ($listUsers as $user) {
 
   }
 }
-
-
 
 
 $totalUsers = getRows("SELECT * FROM users");

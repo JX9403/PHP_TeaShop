@@ -3,8 +3,8 @@
 
 if (!defined('_CODE')) {
   die('Access denied...');
-
 }
+
 $data = [
   'pageTitle' => 'Đăng nhập'
 ];
@@ -18,15 +18,16 @@ layouts('header-login', $data);
 // removeSession('loginToken');
 if (isPost()) {
   $filterAll = filter();
+
   if (!empty(trim($filterAll['email'])) && !empty(trim($filterAll['password']))) {
     $email = $filterAll['email'];
     $password = $filterAll['password'];
+    
     $userQuery = oneRaw("SELECT password, id , role FROM users WHERE email = '$email' ");
 
     if (!empty($userQuery)) {
       $passwordHash = $userQuery["password"];
       $userId = $userQuery["id"];
-
       $userRole = $userQuery["role"]; // Lấy role
 
       if (password_verify($password, $passwordHash)) {

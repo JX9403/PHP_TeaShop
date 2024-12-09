@@ -13,7 +13,8 @@ const _PASS = '';
 
 
 const _MODULE = 'home';
-const _ACTION = 'dashboard';
+const _ACTION = 'homepage';
+
 const _CODE = true;
 
 define('_WEB_HOST', 'http://' . $_SERVER['HTTP_HOST'] . "/ProjectPHP01/manager_user");

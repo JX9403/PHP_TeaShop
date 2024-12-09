@@ -36,6 +36,7 @@ function insert($table, $data)
   $valuetb = ':' . implode(',:', $key);
 
   $sql = 'INSERT INTO ' . $table . ' (' . $truong . ') VALUES (' . $valuetb . ')';
+  // INSERT INTO users (username,email,password) VALUES (:username,:email,:password)
 
   $kq = query($sql, $data);
 
@@ -55,7 +56,7 @@ function update($table, $data, $condition = '')
   } else {
     $sql = 'UPDATE ' . $table . ' SET ' . $update;
   }
-
+// UPDATE users SET email = :email, age = :age WHERE id = 1
 
   $kq = query($sql, $data);
 
@@ -66,10 +67,12 @@ function update($table, $data, $condition = '')
 function delete($table, $condition = '')
 {
     if (!empty($condition)) {
-        $sql = 'DELETE FROM ' . $table . ' WHERE ' . $condition; // Thêm điều kiện WHERE
+        $sql = 'DELETE FROM ' . $table . ' WHERE ' . $condition; 
     } else {
-        $sql = 'DELETE FROM ' . $table; // Không có điều kiện xóa toàn bộ bảng
+        $sql = 'DELETE FROM ' . $table; 
     }
+    
+// DELETE FROM users WHERE id = 1;
     $kq = query($sql);
     return $kq;
 }

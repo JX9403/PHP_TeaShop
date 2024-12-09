@@ -172,7 +172,6 @@ layouts('header-login', $data);
 
 
       <hr>
-      <p class="text-center"><a href="?module=auth&action=forgot">Quên mật khẩu</a></p>
       <p class="text-center"><a href="?module=auth&action=login">Đăng nhập</a></p>
     </form>
   </div>
